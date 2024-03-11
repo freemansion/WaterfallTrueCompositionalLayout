@@ -33,7 +33,9 @@ public final class WaterfallTrueCompositionalLayout {
         }
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsetsReference = config.contentInsetsReference
+        if #available(iOS 14.0, *) {
+            section.contentInsetsReference = config.contentInsetsReference.inset
+        }
         return section
     }
 }

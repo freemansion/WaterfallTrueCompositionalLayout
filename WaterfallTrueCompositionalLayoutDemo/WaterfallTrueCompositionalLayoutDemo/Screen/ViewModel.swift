@@ -35,7 +35,7 @@ final class ViewModel {
     
     private let columnCountSubject = CurrentValueSubject<Int, Never>(Constants.columnCount)
     private let spacingSubject = CurrentValueSubject<CGFloat, Never>(Constants.spacing)
-    private let contentInsetsReferenceSubject = CurrentValueSubject<UIContentInsetsReference, Never>(Constants.contentInsetsReference)
+    private let contentInsetsReferenceSubject = CurrentValueSubject<WaterfallContentInsetsReference, Never>(Constants.contentInsetsReference)
     private let itemsSubject = CurrentValueSubject<[ItemModel], Never>(makeItems())
     
     init() {}
@@ -147,7 +147,7 @@ private extension ViewModel {
     enum Constants {
         static let columnCount = 3
         static let spacing: CGFloat = 8
-        static let contentInsetsReference = UIContentInsetsReference.automatic
+        static let contentInsetsReference = WaterfallContentInsetsReference.automatic
     }
     
     static func makeItems() -> [ItemModel] {

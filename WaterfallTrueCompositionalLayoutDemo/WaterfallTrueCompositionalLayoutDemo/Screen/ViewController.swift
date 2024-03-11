@@ -39,7 +39,7 @@ final class ViewController: UICollectionViewController {
             let layout = UICollectionViewCompositionalLayout { sectionIndex, enviroment in
                 WaterfallTrueCompositionalLayout.makeLayoutSection(
                     config: configuration,
-                    enviroment: enviroment,
+                    environment: enviroment,
                     sectionIndex: sectionIndex
                 )
             }

@@ -7,6 +7,25 @@
 
 import UIKit
 
+public enum WaterfallContentInsetsReference : Int, @unchecked Sendable {
+    case automatic = 0 // use system defined default
+    case none = 1 // no additional insets
+    case safeArea = 2 // honor safe area
+    case layoutMargins = 3 // honor layout margins
+    case readableContent = 4 // honor readable content
+
+    @available(iOS 14.0, *)
+    var inset: UIContentInsetsReference {
+        switch self {
+        case .automatic: return .automatic
+        case .none: return .none
+        case .safeArea: return .safeArea
+        case .layoutMargins: return .layoutMargins
+        case .readableContent: return .readableContent
+        }
+    }
+}
+
 public extension WaterfallTrueCompositionalLayout {
     typealias ItemHeightProvider = (_ index: Int, _ itemWidth: CGFloat) -> CGFloat
     typealias ItemCountProvider = () -> Int
@@ -14,7 +33,7 @@ public extension WaterfallTrueCompositionalLayout {
     struct Configuration {
         public let columnCount: Int
         public let interItemSpacing: CGFloat
-        public let contentInsetsReference: UIContentInsetsReference
+        public let contentInsetsReference: WaterfallContentInsetsReference
         public let itemHeightProvider: ItemHeightProvider
         public let itemCountProvider: ItemCountProvider
         
@@ -28,7 +47,7 @@ public extension WaterfallTrueCompositionalLayout {
         public init(
             columnCount: Int = 2,
             interItemSpacing: CGFloat = 8,
-            contentInsetsReference: UIContentInsetsReference = .automatic,
+            contentInsetsReference: WaterfallContentInsetsReference = .automatic,
             itemCountProvider: @escaping ItemCountProvider,
             itemHeightProvider: @escaping ItemHeightProvider
         ) {
