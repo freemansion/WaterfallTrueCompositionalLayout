@@ -11,12 +11,15 @@ public final class WaterfallTrueCompositionalLayout {
     public static func makeLayoutSection(
         config: Configuration,
         environment: NSCollectionLayoutEnvironment,
-        sectionIndex: Int
+        sectionIndex: Int,
+        sectionInsets: NSDirectionalEdgeInsets = .zero
     ) -> NSCollectionLayoutSection {
         var items = [NSCollectionLayoutGroupCustomItem]()
+
+        let collectionWidth = environment.container.contentSize.width - (sectionInsets.leading + sectionInsets.trailing)
         let itemProvider = LayoutBuilder(
             configuration: config,
-            collectionWidth: environment.container.contentSize.width
+            collectionWidth: collectionWidth
         )
         for i in 0..<config.itemCountProvider() {
             let item = itemProvider.makeLayoutItem(for: i)
@@ -36,6 +39,7 @@ public final class WaterfallTrueCompositionalLayout {
         if #available(iOS 14.0, *) {
             section.contentInsetsReference = config.contentInsetsReference.inset
         }
+        section.contentInsets = sectionInsets
         return section
     }
 }
